@@ -41,7 +41,14 @@ def index(request):
 def contact(request):
     return render(request, 'contact.html', context={})
 
-class AllTranslasion(APIView):
+def AllTranslasionHtml(request):
+    data = Translation.objects.all()
+    return render(request, 'AllTranslasion.html', context={'data': data})
+
+class AllTranslasions(APIView):
     def get(self, request): 
-        return Response(data={}, status=None)
+        
+        data = Translation.objects.all() # get all the data from the Translation table
+        serializer_data = TranslationSerializer(data, many=True) # serialize the data
+        return Response(serializer_data.data, status=status.HTTP_200_OK) # return the serialized data
     

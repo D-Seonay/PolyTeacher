@@ -16,8 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from translator.views import index, contact
-from translator.views import AllTranslasion
+from translator.views import index, contact, AllTranslasionHtml
+from translator.views import AllTranslasions
 from translator.views import FrenchSpanishTranslationViewSet
 from translator.views import FrenchEnglishTranslationViewSet
 
@@ -26,7 +26,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index),
     path('contact', contact),
-    path('AllTranslasion', AllTranslasion.as_view(), name='AllTranslasion'),
+    path('AllTranslasionHtml', AllTranslasionHtml),
+    path('api/AllTranslasions', AllTranslasions.as_view(), name='AllTranslasion'),
     path('api/french_spanish_translator', FrenchSpanishTranslationViewSet.as_view(), name='french_spanish_translator'),
     path('api/french_english_translator', FrenchEnglishTranslationViewSet.as_view(), name='french_english_translator'),
 ]

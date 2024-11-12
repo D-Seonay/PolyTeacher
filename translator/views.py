@@ -37,3 +37,11 @@ class FrenchEnglishTranslationViewSet(APIView):
 
 def index(request):
     return render(request, 'index.html', context={})
+
+def contact(request):
+    return render(request, 'contact.html', context={})
+
+class AllTranslasion(APIView):
+    def get(self, request): 
+        return Response(data={}, status=None)
+    

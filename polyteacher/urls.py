@@ -16,18 +16,27 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from translator.views import index, contact, AllTranslasionHtml
-from translator.views import AllTranslasions
+from translator.views import index, contact, AllTranslationHtml, AddTranslationHtml, navbar
+from translator.views import AllTranslations
+from translator.views import AddTranslation
 from translator.views import FrenchSpanishTranslationViewSet
 from translator.views import FrenchEnglishTranslationViewSet
+from translator.views import SpanishEnglishTranslationViewSet
+from translator.views import SpanishFrenchTranslationViewSet
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index),
+    path('navbar', navbar),
     path('contact', contact),
-    path('AllTranslasionHtml', AllTranslasionHtml),
-    path('api/AllTranslasions', AllTranslasions.as_view(), name='AllTranslasion'),
+    path('AllTranslationHtml', AllTranslationHtml),
+    path('AddTranslationHtml', AddTranslationHtml),
+    path('api/AllTranslations', AllTranslations.as_view(), name='AllTranslasion'),
+    path('api/AddTranslation', AddTranslation.as_view(), name='AddTranslation'),
     path('api/french_spanish_translator', FrenchSpanishTranslationViewSet.as_view(), name='french_spanish_translator'),
     path('api/french_english_translator', FrenchEnglishTranslationViewSet.as_view(), name='french_english_translator'),
+    path('api/spanish_english_translator', SpanishEnglishTranslationViewSet.as_view(), name='spanish_english_translator'),
+    path('api/spanish_french_translator', SpanishFrenchTranslationViewSet.as_view(), name='spanish_french_translator'),
+    
 ]

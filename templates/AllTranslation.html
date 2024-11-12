@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Translations</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Responsive grid */
+        .translations-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        /* Colors for each language */
+        .lang-en { --color-primary: #3498db; } /* English: blue */
+        .lang-fr { --color-primary: #e74c3c; } /* French: red */
+        .lang-es { --color-primary: #f39c12; } /* Spanish: orange */
+        .lang-de { --color-primary: #8e44ad; } /* German: purple */
+        .lang-it { --color-primary: #2ecc71; } /* Italian: green */
+        
+        /* Translation box with gradient */
+        .translation-box {
+            padding: 1rem;
+            color: white;
+            border-radius: 8px;
+            background: var(--gradient);
+        }
+    </style>
+    <script>
+        async function fetchTranslations() {
+            try {
+                const response = await fetch('/api/AllTranslations');
+                const data = await response.json();
+                displayTranslations(data);
+                console.log(data);
+            } catch (error) {
+                console.error('Error fetching translations:', error);
+            }
+        }
+
+        function displayTranslations(translations) {
+            const translationsContainer = document.getElementById('translations-container');
+            translationsContainer.innerHTML = '';
+
+            translations.forEach(translation => {
+                const translationElement = document.createElement('div');
+
+                // Classes for language colors
+                const sourceLangClass = `lang-${translation.source_language.toLowerCase()}`;
+                const targetLangClass = `lang-${translation.target_language.toLowerCase()}`;
+
+                // Apply gradient based on source and target colors
+                translationElement.className = `translation-box ${sourceLangClass} ${targetLangClass}`;
+                translationElement.style.setProperty('--gradient', `linear-gradient(180deg, var(--color-primary), var(--color-secondary))`);
+
+                // Fallback if language colors are not defined
+                translationElement.style.setProperty('--color-secondary', `var(--${targetLangClass}--color-primary, #333)`);
+
+                translationElement.innerHTML = `
+                    <p><strong>Source Language:</strong> ${translation.source_language}</p>
+                    <p><strong>Source Text:</strong> ${translation.source_text}</p>
+                    <p><strong>Target Language:</strong> ${translation.target_language}</p>
+                    <p><strong>Target Text:</strong> ${translation.target_text}</p>
+                `;
+                translationsContainer.appendChild(translationElement);
+            });
+        }
+
+        window.onload = fetchTranslations;
+    </script>
+</head>
+<body>
+    <div id="navbar-container"></div>
+    <script>
+        // Inclure la navbar
+        async function loadNavbar() {
+            const response = await fetch('navbar');
+            const navbar = await response.text();
+            document.getElementById('navbar-container').innerHTML = navbar;
+        }
+        loadNavbar();
+    </script>
+
+    <h1 class="text-center my-4">All Translations</h1>
+    <div id="translations-container" class="translations-container container"></div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Translation</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        async function addTranslation(event) {
+            event.preventDefault();
+            const sourceLanguage = document.getElementById('source_language').value;
+            const sourceText = document.getElementById('source_text').value;
+            const targetLanguage = document.getElementById('target_language').value;
+            const targetText = document.getElementById('target_text').value;
+
+            const response = await fetch('/api/AddTranslation', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    source_language: sourceLanguage,
+                    source_text: sourceText,
+                    target_language: targetLanguage,
+                    target_text: targetText
+                }),
+            });
+
+            if (response.ok) {
+                const translationData = await response.json();
+                document.getElementById('translation-details').innerHTML = `
+                    <div class="alert alert-success mt-4">
+                        <p><strong>Source Language:</strong> ${translationData.source_language}</p>
+                        <p><strong>Source Text:</strong> ${translationData.source_text}</p>
+                        <p><strong>Target Language:</strong> ${translationData.target_language}</p>
+                        <p><strong>Target Text:</strong> ${translationData.target_text}</p>
+                    </div>
+                `;
+                console.log(translationData);
+            } else {
+                console.error('Error adding translation:', response.statusText);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="navbar-container"></div>
+
+    <script>
+        // Inclure la navbar
+        async function loadNavbar() {
+            const response = await fetch('navbar');
+            const navbar = await response.text();
+            document.getElementById('navbar-container').innerHTML = navbar;
+        }
+        loadNavbar();
+    </script>
+
+    <!-- Main Content -->
+    <div class="container mt-5">
+        <h1 class="mb-4">Add Translation</h1>
+        <form onsubmit="addTranslation(event)" class="border p-4 rounded">
+            <div class="form-group">
+                <label for="source_language">Source Language:</label>
+                <select class="form-control" id="source_language" name="source_language" required>
+                    <option value="FR">French</option>
+                    <option value="EN">English</option>
+                    <option value="ES">Spanish</option>
+                    <option value="DE">German</option>
+                    <option value="IT">Italian</option>
+                    <option value="PT">Portuguese</option>
+                    <option value="RU">Russian</option>
+                    <option value="ZH">Chinese</option>
+                    <option value="JA">Japanese</option>
+                    <option value="KO">Korean</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="source_text">Source Text:</label>
+                <input type="text" class="form-control" id="source_text" name="source_text" required>
+            </div>
+            <div class="form-group">
+                <label for="target_language">Target Language:</label>
+                <select class="form-control" id="target_language" name="target_language" required>
+                    <option value="FR">French</option>
+                    <option value="EN">English</option>
+                    <option value="ES">Spanish</option>
+                    <option value="DE">German</option>
+                    <option value="IT">Italian</option>
+                    <option value="PT">Portuguese</option>
+                    <option value="RU">Russian</option>
+                    <option value="ZH">Chinese</option>
+                    <option value="JA">Japanese</option>
+                    <option value="KO">Korean</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="target_text">Target Text:</label>
+                <input type="text" class="form-control" id="target_text" name="target_text" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Translation</button>
+        </form>
+        <div id="translation-details"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

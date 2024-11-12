@@ -1,5 +1,53 @@
-<a href="/api/french_spanish_translator">Traducteur Français vers Espagnol</a>
-</br>
-<a href="/api/french_english_translator">Traducteur Français vers Anglais</a>
-</br>
-<a href="/admin">Section administrateur</a>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>API de traduction</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">PolyTeacher</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav
+            ">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<main class="container">
+    <section>
+        <h1>API de traduction</h1>
+        <section style="display: flex; flex-direction: column; align-items: center;">
+            <div class="alert alert-info">
+                <p>Vous pouvez accéder aux traducteurs en cliquant sur les liens ci-dessous.</p>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    Voir les traducteurs
+                </button>
+            </div>
+            <div class="collapse" id="collapseExample" style="display: flex; flex-direction: column; align-items: center;">
+                <a href="/api/french_spanish_translator">Traducteur Français vers Espagnol</a>
+                <a href="/api/french_english_translator">Traducteur Français vers Anglais</a>
+                <a href="/admin">Section administrateur</a>
+            </div>
+        </section>
+    </section>
+</main>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

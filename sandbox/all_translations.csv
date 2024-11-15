@@ -1,17 +1,18 @@
-Français;Spanish;English;Italian;Anglais
-Bonjour;;;;An error occurred: 429 Resource has been exhausted (e.g. check quota).
-Salut;;;;"Hello 
-"
-Comment tu t'appelles ?;;;;An error occurred: 429 Resource has been exhausted (e.g. check quota).
-Je m'appelle;;;;An error occurred: 429 Resource has been exhausted (e.g. check quota).
-Comment ça va ?;;;;An error occurred: 429 Resource has been exhausted (e.g. check quota).
-Ça va bien;;;;An error occurred: 429 Resource has been exhausted (e.g. check quota).
-Ça va mal;;;;An error occurred: 429 Resource has been exhausted (e.g. check quota).
-Je suis désolé;;;;An error occurred: 429 Resource has been exhausted (e.g. check quota).
-Merci;;;;An error occurred: 429 Resource has been exhausted (e.g. check quota).
-De rien;;;;An error occurred: 429 Resource has been exhausted (e.g. check quota).
-S'il vous plaît;;;;An error occurred: 429 Resource has been exhausted (e.g. check quota).
-Oui;;;;An error occurred: 429 Resource has been exhausted (e.g. check quota).
-Non;;;;An error occurred: 429 Resource has been exhausted (e.g. check quota).
-Excusez-moi;;;;An error occurred: 429 Resource has been exhausted (e.g. check quota).
-Au revoir;;;;An error occurred: 429 Resource has been exhausted (e.g. check quota).
+Français;Espagnol;Anglais;Italian
+Bonjour;Hola.;Hello.;Ciao.
+Salut;Hola.;Hi.;Ciao.
+Comment tu t'appelles ?;¿Cómo te llamas?;What is your name?;Come ti chiami?
+Je m'appelle;Me llamo.;My name is.;"The translation of ""Je m'appelle"" from French to Italian is: **Mi chiamo**."
+Comment ça va ?;¿Cómo estás?;How are you?;"The translation of ""Comment ça va ?"" from French to Italian is: **Come stai?** 
+
+**Note:** While ""Come sta?"" is also a correct translation, it is more formal and less common in everyday conversation. ""Come stai?"" is the more natural and usual way to ask ""How are you?"" in Italian."
+Ça va bien;Está bien.;I'm fine.;Va tutto bene.
+Ça va mal;Las cosas van mal.;This is not going well.;Va male.
+Je suis désolé;Lo siento.;I'm sorry.;Mi dispiace.
+Merci;Gracias.;Thank you.;Grazie.
+De rien;De nada.;You're welcome.;Prego.
+S'il vous plaît;Por favor.;Please.;Per favore.
+Oui;Sí.;Yes.;Sì.
+Non;No.;No.;No.
+Excusez-moi;Disculpa.;Excuse me.;Scusa.
+Au revoir;Adiós.;Goodbye.;Ciao.

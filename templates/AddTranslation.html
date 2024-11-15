@@ -6,6 +6,7 @@
     <title>Add Translation</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script>
+        // Fonction pour ajouter une traduction individuelle
         async function addTranslation(event) {
             event.preventDefault();
             const sourceLanguage = document.getElementById('source_language').value;
@@ -36,10 +37,62 @@
                         <p><strong>Target Text:</strong> ${translationData.target_text}</p>
                     </div>
                 `;
-                console.log(translationData);
             } else {
-                console.error('Error adding translation:', response.statusText);
+                document.getElementById('translation-details').innerHTML = `
+                    <div class="alert alert-danger mt-4">
+                        Error adding translation: ${response.statusText}
+                    </div>
+                `;
             }
+        }
+
+        // Fonction pour ajouter des traductions depuis un fichier JSON
+        async function addTranslationsFromJson() {
+            const fileInput = document.getElementById('json_file');
+            const file = fileInput.files[0];
+
+            if (!file) {
+                alert("Please select a JSON file.");
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = async function (event) {
+                try {
+                    const translations = JSON.parse(event.target.result);
+
+                    const response = await fetch('/api/AddTranslationWithJson', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(translations),
+                    });
+
+                    if (response.ok) {
+                        const result = await response.json();
+                        document.getElementById('bulk-upload-status').innerHTML = `
+                            <div class="alert alert-success">
+                                Successfully added ${result.length} translations!
+                            </div>
+                        `;
+                    } else {
+                        document.getElementById('bulk-upload-status').innerHTML = `
+                            <div class="alert alert-danger">
+                                Failed to add translations. ${response.statusText}
+                            </div>
+                        `;
+                    }
+                } catch (error) {
+                    document.getElementById('bulk-upload-status').innerHTML = `
+                        <div class="alert alert-danger">
+                            Invalid JSON file or unexpected error: ${error.message}
+                        </div>
+                    `;
+                }
+            };
+
+            reader.readAsText(file);
         }
     </script>
 </head>
@@ -59,6 +112,8 @@
     <!-- Main Content -->
     <div class="container mt-5">
         <h1 class="mb-4">Add Translation</h1>
+
+        <!-- Formulaire pour ajout individuel -->
         <form onsubmit="addTranslation(event)" class="border p-4 rounded">
             <div class="form-group">
                 <label for="source_language">Source Language:</label>
@@ -100,7 +155,21 @@
             </div>
             <button type="submit" class="btn btn-primary">Add Translation</button>
         </form>
+
         <div id="translation-details"></div>
+
+        <!-- Formulaire pour importation JSON -->
+        <div class="mt-5">
+            <h2 class="mb-4">Add Translations via JSON File</h2>
+            <form id="json-upload-form" enctype="multipart/form-data" class="border p-4 rounded">
+                <div class="form-group">
+                    <label for="json_file">Upload JSON File:</label>
+                    <input type="file" class="form-control-file" id="json_file" name="json_file" accept=".json" required>
+                </div>
+                <button type="button" class="btn btn-secondary" onclick="addTranslationsFromJson()">Upload</button>
+            </form>
+            <div id="bulk-upload-status" class="mt-4"></div>
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
